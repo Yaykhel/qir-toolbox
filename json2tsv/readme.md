@@ -86,7 +86,7 @@ JPCOARスキーマv2.0の必須・推奨項目のうち、本プロジェクト�
     *   `journal_info` が無い JSON（例：`json_sample_*.json`）、または値が空の項目は、従来どおり設定ブロック（`DEFAULTS`）の値を使います。
 *   **新形式の要素（任意）**：新しい形式の JSON（`manuscript_id` を持つもの）に含まれる要素を、次の列に出力します。
     *   `authors[*].family_name` / `authors[*].given_name` → `/jpcoar:creator#n/jpcoar:familyName#1` / `/jpcoar:creator#n/jpcoar:givenName#1`（各 `@xml:lang` 付き、`creatorName` の後）。1 語の氏名では `given_name` が null のため姓のみ。
-    *   `authors[*].identifiers.scopus` → `/jpcoar:creator#n/jpcoar:nameIdentifier#2`（`@nameIdentifierScheme`、`@nameIdentifierURI=https://www.scopus.com/authid/detail.uri?authorId={ID}`）
+    *   `authors[*].identifiers`（Scopus 著者ID）は、JPCOAR の `nameIdentifierScheme` の語彙に Scopus が無いため出力しません。
     *   `manuscript_record.received` / `manuscript_record.accepted` → `/datacite:date#2` / `/datacite:date#3`（`@dateType=Submitted` / `Accepted`）。`manuscript_id` を持つレコードのみ。
     *   `conference`（例：`"QiR2025"`、通常論文は null）→ `/jpcoar:conference#1/jpcoar:conferenceName#1`（`@xml:lang` 付き）
     *   `subjects`（主題分野）→ キーワードの後に続く `/jpcoar:subject#k`（`@subjectScheme` は設定ブロックの `subject_area_scheme`）
@@ -130,7 +130,7 @@ JPCOARスキーマv2.0の必須・推奨項目のうち、本プロジェクト�
 *   `json_sample_2.json` → `output_sample_2.txt`
     *   著者数・所属数・キーワード数がより多い重厚例（列増殖の上限確認に有用）。
 *   `json_sample_3.json` → `output_sample_3.txt`
-    *   新形式の要素をすべて含む例（架空のデータ）。姓・名、Scopus 著者ID、1 語の氏名、主題分野、言語、会議、受付日・受理日の列を確認できます。
+    *   新形式の要素をすべて含む例（架空のデータ）。姓・名、1 語の氏名、主題分野、言語、会議、受付日・受理日の列を確認できます。
 
 ***
 
